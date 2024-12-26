@@ -1,5 +1,8 @@
 FROM python:3.12-slim
 
+ARG CHUNKSIZE=10
+ENV CHUNKSIZE=$CHUNKSIZE
+
 WORKDIR /app
 
 COPY requirements.txt .

@@ -1,3 +1,4 @@
+import os
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -6,7 +7,11 @@ from pydantic import BaseModel, PastDate
 
 api = FastAPI()
 fake = Faker()
-chunk_size = 1000
+default_chunk = 1000
+try:
+    chunk_size = int(os.getenv('CHUNKSIZE', default_chunk))
+except ValueError:
+    chunk_size = default_chunk
 test_data = []
 
 origins = [
